@@ -1,8 +1,6 @@
 name: super action
 
-on:
-  schedule:
-    - cron: "*/15 * * * *"
+on: [pull_request]
 
 jobs:
   wow:
